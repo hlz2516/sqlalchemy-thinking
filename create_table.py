@@ -1,3 +1,4 @@
+# 该内容为第二节，因为其他内容可能引用该模块，因此文件名需按照模块规范取名
 from sqlalchemy import *
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
@@ -14,38 +15,40 @@ metaData = MetaData() #这是一个字典集合，key为Table对象中设置的�
 Role = Table(
     "Role",
     metaData,
-    Column("RoleID",Integer,primary_key=True),
+    Column("RoleID",Integer,primary_key=True,autoincrement=True),
     Column("RoleName",String(255),nullable=False),
 )
 
 Account = Table(
     "Account",
     metaData,
-    Column("ID",Integer,primary_key=True),
+    Column("ID",Integer,primary_key=True,autoincrement=True),
     Column("LoginName",String(50),nullable=False),
     Column("Password",String(64),nullable=True),
-    Column("DataStatus",String(1),nullable=True)
+    Column("DataStatus",String(1),nullable=True),
+    Column("Age",Integer),
+    Column("CreateTime",DateTime)
 )
 
 P_Function = Table(
     "P_Function",
     metaData,
-    Column("FunctionID",Integer,primary_key=True),
+    Column("FunctionID",Integer,primary_key=True,autoincrement=True),
     Column("FunctionName",String(200),nullable=False),
 )
 
 Role_Account = Table(
     "Role_Account",
     metaData,
-    Column("RoleID",Integer,primary_key=True),
+    Column("RoleID",Integer,primary_key=True,autoincrement=True),
     Column("AccountID",Integer,primary_key=True)
 )
 
 Role_Function = Table(
     "Role_Function",
     metaData,
-    Column("RoleID",Integer,primary_key=True),
-    Column("AccountID",Integer,primary_key=True)
+    Column("RoleID",Integer,primary_key=True,autoincrement=True),
+    Column("FunctionID",Integer,primary_key=True)
 )
 
 metaData.create_all(eng)# 执行该代码会创建上述表结构（如果表不存在的情况下）
